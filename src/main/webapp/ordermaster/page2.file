@@ -1,0 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<% if (rowNumber > rowPerPage){
+	if (currentPage != 1){%>
+		<a href="<%=request.getRequestURI()%>?currentPage=1" class="page">第一頁</a>
+		<a href="<%=request.getRequestURI()%>?currentPage=<%=currentPage-1%>" class="page">上一頁</a>
+	<%}%>
+
+<% 	if (currentPage != pageNumber){%>
+		<a href="<%=request.getRequestURI()%>?currentPage=<%=currentPage+1%>" class="page">下一頁</a>
+		<a href="<%=request.getRequestURI()%>?currentPage=<%=pageNumber%>" class="page">最末頁</a>
+	<%}%>
+<%}%>

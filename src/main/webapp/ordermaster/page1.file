@@ -1,0 +1,46 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+int rowPerPage = 5;
+int rowNumber;
+int pageNumber;
+int currentPage = 1;
+int[] pageIndexArray;
+int pageIndex;
+%>
+
+<%
+// 計算分頁資訊
+rowNumber = orderList.size(); // DAO傳來的list大小即是資料筆數
+
+// 計算是否有整除每頁筆數，沒有就多一頁
+if (rowNumber % rowPerPage == 0){
+    pageNumber = rowNumber / rowPerPage;
+} else {
+    pageNumber = rowNumber / rowPerPage + 1;
+}
+
+// 根據總頁數建立索引陣列（決定長度）
+pageIndexArray = new int[pageNumber];
+
+// 計算每頁起始索引是什麼
+for (int i = 1; i <= pageIndexArray.length; i++){
+    pageIndexArray[i-1] = (i * rowPerPage - rowPerPage);
+}%>
+
+<%
+// 獲得現在的頁數
+try{
+    currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    pageIndex = pageIndexArray[currentPage-1];
+} catch (NumberFormatException e){
+    currentPage = 1;
+    pageIndex = 0;
+} catch (ArrayIndexOutOfBoundsException e){
+    currentPage = pageNumber;
+    pageIndex = pageIndexArray[currentPage-1];
+} %>
+
+
+<% if(pageNumber > 0){%>
+    <b>第<%=currentPage%> / <%=pageNumber%>頁</b>
+<% } %>
