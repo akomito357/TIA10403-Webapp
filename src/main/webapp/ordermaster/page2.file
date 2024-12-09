@@ -11,3 +11,16 @@
 		<a href="<%=request.getRequestURI()%>?currentPage=<%=pageNumber%>" class="page">最末頁</a>
 	<%}%>
 <%}%>
+
+<br><br>
+
+	<%if (pageNumber>1){%>
+		<FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">
+			<select size="1" name="currentPage">
+				<%for (int i=1; i<=pageNumber; i++){%>
+	            	<option value="<%=i%>">跳至第<%=i%>頁
+				<%}%>
+			</select>
+			<input type="submit" value="確定" />
+		</FORM>
+	<%}%>
